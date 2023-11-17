@@ -1,6 +1,10 @@
 #include "utility.hpp"
 #include "lio_sam/msg/cloud_info.hpp"
 
+#include "tf2/LinearMath/Matrix3x3.h"
+#include "tf2/LinearMath/Quaternion.h"
+#include "tf2_geometry_msgs/tf2_geometry_msgs.hpp"
+
 struct VelodynePointXYZIRT
 {
     PCL_ADD_POINT4D
@@ -169,6 +173,8 @@ public:
             imuRotY[i] = 0;
             imuRotZ[i] = 0;
         }
+
+        columnIdnCountVec.assign(N_SCAN, 0);
     }
 
     ~ImageProjection(){}
@@ -191,9 +197,9 @@ public:
         //       ", y: " << thisImu.angular_velocity.y << 
         //       ", z: " << thisImu.angular_velocity.z << endl;
         // double imuRoll, imuPitch, imuYaw;
-        // tf::Quaternion orientation;
-        // tf::quaternionMsgToTF(thisImu.orientation, orientation);
-        // tf::Matrix3x3(orientation).getRPY(imuRoll, imuPitch, imuYaw);
+        // tf2::Quaternion orientation;
+        //tf2::fromMsg(thisImu.orientation, orientation);
+        //tf2::Matrix3x3(orientation).getRPY(imuRoll, imuPitch, imuYaw);
         // cout << "IMU roll pitch yaw: " << endl;
         // cout << "roll: " << imuRoll << ", pitch: " << imuPitch << ", yaw: " << imuYaw << endl << endl;
     }
